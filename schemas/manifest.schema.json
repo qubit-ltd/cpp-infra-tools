@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": 1
+    },
+    "owner": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "target": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{64}$"
+          },
+          "executable": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "target",
+          "source",
+          "sha256",
+          "executable"
+        ]
+      }
+    },
+    "project_files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "target": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{64}$"
+          },
+          "executable": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "target",
+          "source",
+          "sha256",
+          "executable"
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema",
+    "files"
+  ]
+}

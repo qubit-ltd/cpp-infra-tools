@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": 1
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "task_id": {
+      "type": "string"
+    },
+    "bundle_id": {
+      "type": "string"
+    },
+    "project": {
+      "type": "string"
+    },
+    "profile": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{64}$"
+    },
+    "config_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{64}$"
+    },
+    "report_root": {
+      "type": "string"
+    },
+    "runtime_snapshot": {
+      "type": "string"
+    },
+    "runtime_snapshot_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{64}$"
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{64}$"
+          },
+          "required": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "kind",
+          "path",
+          "sha256",
+          "required"
+        ]
+      }
+    },
+    "build_context": {},
+    "dependency_context": {},
+    "source_excluded_paths": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schema",
+    "run_id",
+    "task_id",
+    "bundle_id",
+    "project",
+    "profile",
+    "source_digest",
+    "config_digest",
+    "report_root"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "branch": "main",
+  "mode": "main",
+  "repository": @CPP_INFRA_REPOSITORY_JSON@,
+  "revision": @CPP_INFRA_REVISION_JSON@,
+  "schema": 1
+}

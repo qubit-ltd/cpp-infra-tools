@@ -1,0 +1,6 @@
+{
+  "version": 6,
+  "configurePresets": [{"name": "infra-debug", "generator": "Ninja", "binaryDir": "${sourceDir}/build/infra/${presetName}", "cacheVariables": {"CMAKE_BUILD_TYPE": "Debug", "CMAKE_EXPORT_COMPILE_COMMANDS": true}}],
+  "buildPresets": [{"name": "infra-debug", "configurePreset": "infra-debug"}],
+  "testPresets": [{"name": "infra-debug", "configurePreset": "infra-debug", "output": {"outputOnFailure": true}}]
+}

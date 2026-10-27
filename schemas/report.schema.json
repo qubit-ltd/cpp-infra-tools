@@ -1,0 +1,230 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": 1
+    },
+    "tool": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "revision": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "protocol": {
+          "const": 1
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "revision"
+      ]
+    },
+    "bundle_id": {
+      "type": "string"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "task_id": {
+      "type": "string"
+    },
+    "project": {
+      "type": "string"
+    },
+    "report_root": {
+      "type": "string"
+    },
+    "source_revision": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_digest": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-fA-F]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "config_digest": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-fA-F]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "status": {
+      "enum": [
+        "passed",
+        "failed",
+        "error",
+        "cancelled",
+        "skipped"
+      ]
+    },
+    "started_at": {
+      "type": "string"
+    },
+    "duration_ms": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "external_versions": {
+      "type": "object"
+    },
+    "commands": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "program": {
+            "type": "string"
+          },
+          "args": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "cwd": {
+            "type": "string"
+          },
+          "env": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "exit_code": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "log": {
+            "type": "string"
+          },
+          "duration_ms": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "timed_out": {
+            "type": "boolean"
+          },
+          "cancelled": {
+            "type": "boolean"
+          },
+          "stderr_log": {
+            "type": "string"
+          },
+          "termination": {
+            "enum": [
+              "timeout",
+              "cancelled"
+            ]
+          }
+        },
+        "required": [
+          "program",
+          "args",
+          "cwd",
+          "env",
+          "exit_code",
+          "log",
+          "duration_ms"
+        ]
+      }
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "code",
+          "severity",
+          "message",
+          "project_relative_path"
+        ]
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{64}$"
+          },
+          "required": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "kind",
+          "path",
+          "sha256",
+          "required"
+        ]
+      }
+    },
+    "data": {},
+    "source_excluded_paths": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schema",
+    "tool",
+    "bundle_id",
+    "run_id",
+    "task_id",
+    "project",
+    "report_root",
+    "source_revision",
+    "source_digest",
+    "config_digest",
+    "status",
+    "started_at",
+    "duration_ms",
+    "external_versions",
+    "commands",
+    "diagnostics",
+    "artifacts"
+  ]
+}

@@ -1,0 +1,61 @@
+schema = 1
+
+[external_tools.cmake]
+program = "cmake"
+version = ">=3.25"
+tasks = ["verify", "analyze", "coverage"]
+
+[external_tools.ninja]
+program = "ninja"
+version = ">=1.11"
+tasks = ["verify", "analyze", "coverage"]
+
+[external_tools.python]
+program = "python3"
+version = ">=3.10"
+tasks = ["bootstrap", "ci"]
+
+[external_tools.git]
+program = "git"
+version = ">=2.30"
+tasks = ["bootstrap", "ci"]
+
+[external_tools.rustc]
+program = "rustc"
+version = ">=1.94"
+tasks = ["bootstrap", "ci"]
+
+[external_tools.cargo]
+program = "cargo"
+version = ">=1.94"
+tasks = ["bootstrap", "ci"]
+
+[external_tools.clang_format]
+program = "clang-format-18"
+version = ">=18,<19"
+tasks = ["style"]
+
+[external_tools.clang_tidy]
+program = "clang-tidy-18"
+version = ">=18,<19"
+tasks = ["analyze"]
+
+[external_tools.llvm_cov]
+program = "llvm-cov-18"
+version = ">=18,<19"
+tasks = ["coverage"]
+
+[external_tools.llvm_profdata]
+program = "llvm-profdata-18"
+version = ">=18,<19"
+tasks = ["coverage"]
+
+[external_tools.conan]
+program = "conan"
+version = ">=2.33,<3"
+tasks = ["dependency"]
+
+[external_tools.doxygen]
+program = "doxygen"
+version = ">=1.9"
+tasks = ["pages"]

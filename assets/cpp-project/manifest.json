@@ -1,0 +1,109 @@
+{
+  "schema": 1,
+  "files": [
+    {
+      "target": ".infra/bin/align-ci.sh",
+      "source": "assets/cpp-project/bin/align-ci.sh",
+      "sha256": "eb7408b567da5fc24bc6b5885a822a588e5a08f0b514f571f6d0b910d056f485",
+      "executable": true
+    },
+    {
+      "target": ".infra/bin/ci-check.sh",
+      "source": "assets/cpp-project/bin/ci-check.sh",
+      "sha256": "ebc4cb50258c15c14a5b05a8b15cafbf443a11e694c27716614a2d527cea197d",
+      "executable": true
+    },
+    {
+      "target": ".infra/bin/coverage.sh",
+      "source": "assets/cpp-project/bin/coverage.sh",
+      "sha256": "1ce76ddb57f1eabf163fa707fd7651f38f1f99e0013573e6c84e1013391b5a69",
+      "executable": true
+    },
+    {
+      "target": ".infra/bin/style-check.sh",
+      "source": "assets/cpp-project/bin/style-check.sh",
+      "sha256": "bb872eb8a687fc078ab6c53ef1cf183ebb88d604bf8b778195b1adc962372d5b",
+      "executable": true
+    },
+    {
+      "target": ".infra/bootstrap.py",
+      "source": "assets/cpp-project/bootstrap.py",
+      "sha256": "bc115859d67a529e6f9ea3bc299afdb2fb39089fa1aeae65e62c6f183d3cbd4c",
+      "executable": true
+    },
+    {
+      "target": ".infra/cmake/presets.json",
+      "source": "assets/cpp-project/presets.json",
+      "sha256": "78c21b63c704138686eac96800ce7c80082b13c27f159e176ba1c5edf625ad05",
+      "executable": false
+    },
+    {
+      "target": ".infra/tools/defaults.toml",
+      "source": "conf/defaults.toml",
+      "sha256": "7ae2316c70486fcb2aa4852a70780bfb220fa4eec32441ff1ca5fb406c55fb77",
+      "executable": false
+    },
+    {
+      "target": ".infra/tools/schemas/catalog.schema.json",
+      "source": "schemas/catalog.schema.json",
+      "sha256": "f42f5b14b1ee7349f9dadb948aaba93f2b643c62ff2c34d577909dd766528a8e",
+      "executable": false
+    },
+    {
+      "target": ".infra/tools/schemas/channel.schema.json",
+      "source": "schemas/channel.schema.json",
+      "sha256": "2760dde570bf90e103f7ba63d2d5c79db567e32fa4cbbadaac3f9373a64b90ec",
+      "executable": false
+    },
+    {
+      "target": ".infra/tools/schemas/manifest.schema.json",
+      "source": "schemas/manifest.schema.json",
+      "sha256": "f4c58c00bcc433456d3312c81e00475160adc9a6c0fd4eaacfe534c569628668",
+      "executable": false
+    },
+    {
+      "target": ".infra/tools/schemas/report.schema.json",
+      "source": "schemas/report.schema.json",
+      "sha256": "bb9293b62bf89859b73334a167672f12ffb754c9963d9ad62b1633a262814997",
+      "executable": false
+    },
+    {
+      "target": ".infra/tools/schemas/revisions.schema.json",
+      "source": "schemas/revisions.schema.json",
+      "sha256": "5f5a06a73db8760710689eb5043ab497cfc517c1aa58b149d75db463f733dda9",
+      "executable": false
+    },
+    {
+      "target": ".infra/tools/schemas/run-context.schema.json",
+      "source": "schemas/run-context.schema.json",
+      "sha256": "25847c1970245f4efebb06d5ab611fc613085cc2c7e1983fdab9b9535b74c43d",
+      "executable": false
+    },
+    {
+      "target": ".infra/tools/schemas/runtime-snapshot.schema.json",
+      "source": "schemas/runtime-snapshot.schema.json",
+      "sha256": "bb41958c145641ebad804459dac71b4f71204b072007a1d1b61e3ecd2c23cf9a",
+      "executable": false
+    },
+    {
+      "target": ".infra/tools/schemas/tools-lock.schema.json",
+      "source": "schemas/tools-lock.schema.json",
+      "sha256": "f42f5b14b1ee7349f9dadb948aaba93f2b643c62ff2c34d577909dd766528a8e",
+      "executable": false
+    },
+    {
+      "target": "update-infra.sh",
+      "source": "assets/cpp-project/update-infra.sh",
+      "sha256": "2e8da6f778a9bdfcf0b3266a5669d8d5823aee757a161604a67cf4bb17b70b49",
+      "executable": true
+    }
+  ],
+  "templates": [
+    {
+      "target": ".infra/bootstrap-source.json",
+      "source": "assets/cpp-project/bootstrap-source.json.in",
+      "sha256": "4c8bafc0bb5193dfe9318070d3d8db688bd3282905f849c1f06eff45244e3a00",
+      "executable": false
+    }
+  ]
+}
