@@ -19,3 +19,30 @@ concurrency:
 jobs:
   rust-ci:
     uses: qubit-ltd/rs-infra-ci/.github/workflows/github-ci.yml@main
+
+  # Deploy after the whole reusable workflow succeeds, including its optional jobs.
+  pages-deploy:
+    if: ${{ !cancelled() && needs.rust-ci.result == 'success' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    needs: [rust-ci]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout validated source
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - name: Validate Pages configuration
+        id: pages-config
+        run: |
+          set -euo pipefail
+          jq -e '.deploy | type == "boolean"' .infra/pages/pages.json >/dev/null
+          echo "deploy=$(jq -r .deploy .infra/pages/pages.json)" >> "$GITHUB_OUTPUT"
+      - name: Deploy verified Pages artifact
+        if: steps.pages-config.outputs.deploy == 'true'
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e
