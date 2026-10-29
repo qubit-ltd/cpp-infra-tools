@@ -13,20 +13,19 @@ cargo install --path . --locked
 cpp-infra-tools --version --json
 ```
 
-The version response identifies protocol 1. A source build without `CPP_INFRA_BUILD_REVISION` reports `revision: null`; main-cache builds embed the exact Git SHA. Git, Cargo, and Python 3.10+ are required by the main bootstrap. CMake, compilers, Conan, and analysis tools remain environment-provided dependencies.
+The version response identifies protocol 1. A source build without `CPP_INFRA_BUILD_REVISION` reports `revision: null`; main-cache builds embed the exact Git SHA. Git, Cargo, and Python 3.10+ are required by the main bootstrap. CMake, compilers, Conan, and analysis tools remain environment-provided dependencies. A C++ project can commit the generated root `update-infra.sh`; its first run needs Git and Cargo, while later runs use Python 3.10+.
 
 ## Quick start
 
 Consider a CMake library whose developers need the latest shared style and CI rules while retaining its own CMake files and configuration. From its project directory:
 
 ```sh
-cpp-infra-tools --project . init --dry-run
-cpp-infra-tools --project . init
+./update-infra.sh
 ./update-infra.sh --check
 .infra/bin/style-check.sh
 ```
 
-`init --dry-run` prints a local plan and does not contact upstream or create project files. `init` resolves all eight repositories' published `main` commits and installs the bootstrap, owned policies, and missing initial configuration. It preserves existing project configuration. If a repository has no published `main` commit, initialization fails clearly; it does not manufacture a release or silently use a different branch. Edit the seeded project/tool configuration to describe the actual CMake project before running its checks.
+When `.infra/bootstrap.py` is absent, the root script fetches `cpp-infra-tools` from GitHub `main` into a temporary directory and runs `init` with that checkout's Cargo toolchain. Initialization resolves all eight repositories' published `main` commits and installs the bootstrap, owned policies, and missing initial configuration. Existing project configuration is preserved. If a repository has no published `main` commit, initialization fails clearly; it does not manufacture a release or silently use a different branch. Edit the seeded project/tool configuration to describe the actual CMake project before running its checks. Once initialized, the same root script uses the installed bootstrap to update managed files and follow current `main` revisions. `--dry-run`, `--status`, and `--check` require an initialized project; a first run with options fails without creating `.infra`.
 
 `--check` validates the local managed snapshot without consulting a release channel. The style wrapper resolves the selected tool's latest `main`, builds that immutable revision once, and executes it. A normal run writes only caches and `build/` outputs. Obtain newer public policies explicitly:
 

@@ -94,7 +94,7 @@
     {
       "target": "update-infra.sh",
       "source": "assets/cpp-project/update-infra.sh",
-      "sha256": "2e8da6f778a9bdfcf0b3266a5669d8d5823aee757a161604a67cf4bb17b70b49",
+      "sha256": "73b13c76117cb3102da8dae8385d957856a186756aa1fa9cc54c34a6085ce07f",
       "executable": true
     }
   ],

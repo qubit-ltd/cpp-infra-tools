@@ -13,20 +13,19 @@ cargo install --path . --locked
 cpp-infra-tools --version --json
 ```
 
-版本响应包含协议版本 1。未设置 `CPP_INFRA_BUILD_REVISION` 的源码构建返回 `revision: null`；main 缓存中的工具嵌入真实 Git SHA。main 引导流程依赖 Git、Cargo 和 Python 3.10+。CMake、编译器、Conan 和分析工具由运行环境提供。
+版本响应包含协议版本 1。未设置 `CPP_INFRA_BUILD_REVISION` 的源码构建返回 `revision: null`；main 缓存中的工具嵌入真实 Git SHA。main 引导流程依赖 Git、Cargo 和 Python 3.10+。CMake、编译器、Conan 和分析工具由运行环境提供。C++ 项目可以提交生成到根目录的 `update-infra.sh`：首次运行需要 Git 和 Cargo，后续运行需要 Python 3.10+。
 
 ## 快速开始
 
 假设一个 CMake 类库希望采用最新公共风格和 CI 规则，同时保留自己的 CMake 文件与配置。在该项目中执行：
 
 ```sh
-cpp-infra-tools --project . init --dry-run
-cpp-infra-tools --project . init
+./update-infra.sh
 ./update-infra.sh --check
 .infra/bin/style-check.sh
 ```
 
-`init --dry-run` 只打印本地计划，不联网、不创建项目文件。真正初始化时，管理器解析八个仓库已经发布到 `main` 的提交，安装引导入口、受管理策略，并补齐缺失的初始配置；已有项目配置会保留。任何仓库尚无 main 提交都会明确失败，不会捏造发布版本或切换到别的分支。初始配置需要根据实际 CMake 项目填写，然后再执行检查。
+如果项目还没有 `.infra/bootstrap.py`，根目录脚本会把 GitHub `main` 上的 `cpp-infra-tools` 检出到临时目录，并使用该检出版本的 Cargo 工具链执行 `init`。初始化会解析八个仓库已发布到 `main` 的提交，安装引导入口、受管理策略，并补齐缺少的初始配置；已有项目配置会保留。任何仓库尚无 main 提交都会明确失败，不会捏造发布版本或切换到其他分支。初始配置需要根据实际 CMake 项目填写，然后再执行检查。完成初始化后，同一个根目录脚本会通过已安装的引导程序更新受管文件并跟进最新 `main`。首次运行附带参数时会直接报错，不会创建 `.infra`；`--dry-run`、`--status` 和 `--check` 仅适用于已初始化项目。
 
 `--check` 验证本地受管快照，不查询发布渠道。风格入口运行时解析对应工具的最新 main，在缓存中构建确定的提交后执行。普通运行只写缓存和 `build/` 产物。需要更新项目公共策略时，显式执行：
 
